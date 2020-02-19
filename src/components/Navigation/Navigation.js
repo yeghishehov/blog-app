@@ -2,19 +2,10 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import FilterVintageTwoToneIcon from '@material-ui/icons/FilterVintageTwoTone';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-
 import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
-
-import Login from '../Login/Login'
+import Authorization from '../Authorization/Authorization'
 
 
 const useStyles = makeStyles(theme => ({
@@ -22,73 +13,77 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   AppBar: {
-    backgroundColor: '#D2691E',
+    backgroundColor: '#b39ddb',
   },
   item: {
-    color: '#FFE4C4',
-    textTransform: 'capitalize',
-    textIndent: '15px',
-    'font-family': 'Sriracha, cursive',
+    color: '#f3e5f5',
+    fontSize: '20px',
+    fontFamily: 'Sriracha, cursive',    
+  },
+  icon:{
+    marginRight: '5px',
   },
   link: {
-    textDecoration: 'none',
+    textDecoration: 'none',    
+    color: '#616161',
   },
+  dialog:{
+    backgroundColor: '#b39ddb',
+  },
+  dialogTitle:{
+    color: '#f3e5f5',
+    fontSize: '20px',
+    textAlign: 'center',
+    textTransform: 'uppercase',
+  },
+  dialogItem:{
+    textAlign: 'center',
+    fontSize: '20px',
+    color: '#616161',
+  },
+  dialogItemLink:{
+    margin: '0 auto',
+    textDecoration: 'none',    
+    color: '#616161',
+  }
 }));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export default function ButtonAppBar() {
+export default function Navigation(props) {
   const classes = useStyles();    
-  const [openLogin, setOpenLogin] = React.useState(false);
+  const [openMenu, setOpenMenu] = React.useState(false);
+  const {users, setUser} = props;
 
-  const handleChange = event => {
-    setOpenLogin(!openLogin)
-  };
- 
-
+  const handleMenuOpenChange = event => {
+    setOpenMenu(!openMenu)
+  }; 
+  
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.AppBar}>
         <Toolbar>
-          <Grid
-            container
-            direction="row"
-            justify="space-between"
-            alignItems="center"
-          >
+            <Grid
+                container
+                direction="row"
+                justify="space-between"
+                alignItems="center"
+            >
 
-            <Link exact  to="/home" className={classes.link}>
-             <IconButton className={classes.item} >              
-                <FilterVintageTwoToneIcon />                
-                  My Stories
-            </IconButton>
+            <Link to="/" className={classes.link}>
+                <Button className={classes.item}>              
+                     My Stories
+                </Button>
             </Link>
 
               
-            {/* <Link to="/home/login" className={classes.link}> */}
             <div>
-              <Button  className={classes.item}  onClick={handleChange}>
-                <AccountCircleIcon />
-                Log in
-              </Button>
-
-              <Login openLogin={openLogin} handleChange={handleChange} />
-
-              </div>
-            {/* </Link> */}
-
+                <Authorization 
+                    classes={classes}
+                    openMenu={openMenu} 
+                    handleMenuOpenChange={handleMenuOpenChange} 
+                    users={users} 
+                    setUser={setUser} 
+                />
+            </div>
           </Grid>
         </Toolbar>
       </AppBar>
