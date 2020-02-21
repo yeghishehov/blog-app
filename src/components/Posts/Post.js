@@ -41,7 +41,7 @@ export const Post = ({post}) => {
                 <br /> <br />
                 {post.date}
             </CardContent>
-            {window.location.href === 'http://localhost:3000/post'
+            {window.location.href.includes('post')
                 ? null
                 : (
                     <Button 
