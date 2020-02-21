@@ -8,8 +8,10 @@ export default function Logout(props) {
     const {users, setUser} = useContext(UsersContext);
 
     const handleLogout = e => {
-        const userIndex = users.findIndex(user => user.isLogged === true);
-        users[userIndex].isLogged=false;
+        users.forEach(user => {
+            if(user.isLogged === true) user.isLogged = false;
+        });
+        localStorage.setItem('usersStorage', JSON.stringify([...users]));
         setUser([...users]);
     }
 

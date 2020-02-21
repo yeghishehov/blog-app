@@ -30,7 +30,10 @@ export default function CreateComents ({post}) {
         const authorId = loggedUser.id;
         const authorName = loggedUser.name;
         const date = new Date().toLocaleString();
-        setComents([...coments, {id, coment, postId, authorId, authorName, date} ]);
+
+        const updateComents = [ ...coments, {id, coment, postId, authorId, authorName, date} ];
+        localStorage.setItem('comentsStorage', JSON.stringify([...updateComents]));
+        setComents([...updateComents]);
         setComent('');
     }
 

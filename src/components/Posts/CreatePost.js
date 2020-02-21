@@ -39,7 +39,10 @@ export default function CreatePost () {
         const authorId = loggedUser.id;
         const authorName = loggedUser.name;
         const date = new Date().toLocaleString();
-        setPost([...posts, {id, title, content, authorId, authorName, date} ]);
+
+        const updatePosts = [ ...posts, {id, title, content, authorId, authorName, date} ];
+        localStorage.setItem('postsStorage', JSON.stringify([...updatePosts]));
+        setPost([...updatePosts]);
     }
 
     if (!loggedUser) {

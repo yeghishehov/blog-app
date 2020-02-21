@@ -19,10 +19,13 @@ export default function Login(props) {
             const userIndex = users.findIndex(user => userName === user.name && password === user.password);
             if(userIndex > -1){                
                 users[userIndex].isLogged=true;
+                localStorage.setItem('usersStorage', JSON.stringify([...users]));
                 setUser([...users])
             } else {
-                const id = getUniqueId(users) + 1;
-                setUser([...users, {id, name: userName, password, isLogged: true}]);
+                const id = getUniqueId(users) + 1; 
+                const updateUsers = [...users, {id, name: userName, password, isLogged: true}];
+                localStorage.setItem('usersStorage', JSON.stringify([...updateUsers]));
+                setUser([...updateUsers]);                
             }
         }        
     }
