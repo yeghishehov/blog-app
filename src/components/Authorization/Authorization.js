@@ -15,7 +15,7 @@ export default function Authorization(props) {
 
     const {isUserLoged} = useContext(UsersContext);
 
-    const loggedUser = isUserLoged();    //---------------------------------------------IS LOGED
+    const loggedUser = isUserLoged(); 
 
     const username = loggedUser ? loggedUser.name : null; 
 

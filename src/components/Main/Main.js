@@ -60,7 +60,7 @@ export default function Main () {
                         isUserLoged, selectedPost, setSelectedPost}}
             >
                 <Switch>
-                    <Route exact path="/">
+                    <Route exact path="/blog-app">
                         <Home />
                     </Route>
                     <Route path="/create">

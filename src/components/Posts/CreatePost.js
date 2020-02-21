@@ -46,7 +46,7 @@ export default function CreatePost () {
     }
 
     if (!loggedUser) {
-        return <Redirect to="/" />;
+        return <Redirect to="/blog-app" />;
     }
 
     return (
@@ -77,7 +77,7 @@ export default function CreatePost () {
                 rowsMax={10}
             />
             <Grid container direction="row-reverse">
-              <Link to="/" >
+              <Link to="/blog-app" >
                 <IconButton color="primary"  onClick={handleAddPost}>
                   <DoneIcon />
                 </IconButton>

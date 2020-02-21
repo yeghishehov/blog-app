@@ -69,7 +69,7 @@ export default function Navigation(props) {
                 alignItems="center"
             >
 
-            <Link to="/" className={classes.link}>
+            <Link to="/blog-app" className={classes.link}>
                 <Button>              
                      <h1 className={classes.item}>My Stories</h1>
                 </Button>

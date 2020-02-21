@@ -23,7 +23,7 @@ export default function Logout(props) {
                     </Link>
                 </MenuItem>
                 <MenuItem className={classes.dialogItem}>
-                    <Link to='/' className={classes.dialogItemLink} onClick={handleLogout}>
+                    <Link to='/blog-app' className={classes.dialogItemLink} onClick={handleLogout}>
                         Log out
                     </Link>
                 </MenuItem>          
