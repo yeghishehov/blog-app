@@ -1,27 +1,26 @@
 import React, { useContext } from 'react';
 import {PostsContext} from '../Main/Main';
 import { makeStyles } from '@material-ui/core';
-import { Post } from '../Posts/Post';
+import { Coment } from './Coment';
 
 
 const useStyles = makeStyles({
     centered: {
-        width: '50%',
         margin: 'auto',
     },
 })
 
 
-export default function Home() {
-    const {posts} = useContext(PostsContext);
+export default function ComentsPost({post}) {
+    const {coments} = useContext(PostsContext);
     const classes = useStyles();
-
+    const comentsPost = coments.filter(coment => coment.postId === post.id )
     return (
         <div className={classes.centered}>
             {
-                posts.reduceRight ( (reversePosts, post) => 
-                    ([...reversePosts,
-                        <Post key={post.id} post={post} />
+                comentsPost.reduceRight ( (reverseComents, coment) => 
+                    ([...reverseComents,
+                        <Coment key={coment.id} coment={coment} />
                     ])
                 ,[])
             }

@@ -8,11 +8,11 @@ import Grid from '@material-ui/core/Grid';
 import Authorization from '../Authorization/Authorization'
 
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   root: {
     flexGrow: 1,
   },
-  AppBar: {
+  appBar: {
     backgroundColor: '#b39ddb',
   },
   item: {
@@ -34,7 +34,6 @@ const useStyles = makeStyles(theme => ({
     color: '#f3e5f5',
     fontSize: '20px',
     textAlign: 'center',
-    textTransform: 'uppercase',
   },
   dialogItem:{
     textAlign: 'center',
@@ -45,13 +44,15 @@ const useStyles = makeStyles(theme => ({
     margin: '0 auto',
     textDecoration: 'none',    
     color: '#616161',
+  },
+  button: {
+      margin: '0 auto'
   }
-}));
+});
 
 export default function Navigation(props) {
   const classes = useStyles();    
   const [openMenu, setOpenMenu] = React.useState(false);
-  const {users, setUser} = props;
 
   const handleMenuOpenChange = event => {
     setOpenMenu(!openMenu)
@@ -59,7 +60,7 @@ export default function Navigation(props) {
   
   return (
     <div className={classes.root}>
-      <AppBar position="static" className={classes.AppBar}>
+      <AppBar position="static" className={classes.appBar}>
         <Toolbar>
             <Grid
                 container
@@ -69,8 +70,8 @@ export default function Navigation(props) {
             >
 
             <Link to="/" className={classes.link}>
-                <Button className={classes.item}>              
-                     My Stories
+                <Button>              
+                     <h1 className={classes.item}>My Stories</h1>
                 </Button>
             </Link>
 
@@ -80,9 +81,8 @@ export default function Navigation(props) {
                     classes={classes}
                     openMenu={openMenu} 
                     handleMenuOpenChange={handleMenuOpenChange} 
-                    users={users} 
-                    setUser={setUser} 
                 />
+
             </div>
           </Grid>
         </Toolbar>
