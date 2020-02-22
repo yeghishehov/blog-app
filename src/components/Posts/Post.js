@@ -6,6 +6,8 @@ import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import {PostsContext} from '../Main/Main';
 import { makeStyles } from '@material-ui/core';
+import PostEditor from './PostEditor';
+import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles({
     card: {
@@ -23,35 +25,63 @@ const useStyles = makeStyles({
 })
 
 export const Post = ({post}) => {
-    const {setSelectedPost} = useContext(PostsContext);
+    const {setSelectedPost, isUserLoged} = useContext(PostsContext);
     const classes = useStyles();
+    const [isEditPost, setIsEditPost] = React.useState(false);
+    const logedUser = isUserLoged();
 
-    const handlseClick = () => {
+    const accessEdit = logedUser ? logedUser.id === post.authorId : false;
+
+    const handleLearnMore = () => {
         setSelectedPost(post)
+    }
+
+    const handleEditPost = () => {
+        setIsEditPost(!isEditPost)
     }
 
    return (  
         <Card className={classes.card}>
-            <CardHeader 
-                title={post.title}
-                subheader={`author: ${post.authorName}`}
-            />
-            <CardContent>
-                {post.content}
-                <br /> <br />
-                {post.date}
-            </CardContent>
-            {window.location.href.includes('post')
-                ? null
-                : (
-                    <Button 
-                        className={classes.button} 
-                        color="primary"
-                        onClick={handlseClick}
-                    >  
-                        <Link to={`/post`} > Learn more </Link>
-                    </Button>
-                )
+            {
+                isEditPost 
+                    ? (
+                        <PostEditor post={post} handleEditPost={handleEditPost}/>
+                    )
+                    : (
+                        <>
+                            <CardHeader 
+                                title={post.title}
+                                subheader={`author: ${post.authorName}`}
+                            />
+                            <CardContent>
+                                {post.content}
+                                <br /> <br />
+                                {post.date}
+                            </CardContent>
+                            {window.location.href.includes('post')
+                                ? ( 
+                                    accessEdit
+                                        ? (
+                                            <Button 
+                                                className={classes.button} 
+                                                color="primary"
+                                                onClick={handleEditPost}
+                                            >  
+                                                <EditIcon />
+                                            </Button>
+                                        ) : null
+                                ) : (
+                                    <Button 
+                                        className={classes.button} 
+                                        color="primary"
+                                        onClick={handleLearnMore}
+                                    >  
+                                        <Link to={`/post`} > Learn more </Link>
+                                    </Button>
+                                )
+                            }
+                        </>
+                    )
             }
         </Card>
     )

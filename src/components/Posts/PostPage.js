@@ -29,14 +29,16 @@ export function PostPage() {
         return( 
             <Dialog open={true} aria-labelledby="simple-dialog-title" >
                 <DialogTitle id="simple-dialog-title">Please log in to your account</DialogTitle>
-                <Link to='/blog-app' className={classes.link}> <Button > ok </Button> </Link>
+                <Link to='/blog-app' className={classes.link}> 
+                    <Button > ok </Button> 
+                </Link>
             </Dialog>
         )
     }
 
     return ( 
         <div className={classes.centered}>
-            <Post post={selectedPost} />
+            <Post post={selectedPost} loggedUser={loggedUser} />
             <CreateComents post={selectedPost} />
             <ComentsPost post={selectedPost} />
         </div>
