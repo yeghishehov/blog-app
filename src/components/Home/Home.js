@@ -1,30 +1,22 @@
 import React, { useContext } from 'react';
 import {PostsContext} from '../Main/Main';
-import { makeStyles } from '@material-ui/core';
 import { Post } from '../Posts/Post';
-
-
-const useStyles = makeStyles({
-    centered: {
-        width: '50%',
-        margin: 'auto',
-    },
-})
-
+import Grid from '@material-ui/core/Grid';
 
 export default function Home() {
     const {posts} = useContext(PostsContext);
-    const classes = useStyles();
 
     return (
-        <div className={classes.centered}>
+        <Grid container spacing={3} justify="center">            
             {
                 posts.reduceRight ( (reversePosts, post) => 
                     ([...reversePosts,
-                        <Post key={post.id} post={post} />
+                        <Grid item sm={7} key={post.id}>
+                            <Post post={post} />
+                        </Grid>
                     ])
                 ,[])
             }
-        </div>
+        </Grid>
     )
 }

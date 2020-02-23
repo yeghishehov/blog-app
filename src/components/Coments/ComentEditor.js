@@ -1,19 +1,11 @@
 import React, { useContext } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import DoneIcon from '@material-ui/icons/Done';
 import {PostsContext} from '../Main/Main'
 import { IconButton } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
-    textField: {
-        marginTop: 20,
-    }
-  }));
-
 export default function ComentEditor ({thisComent, handleEditComent}) {
-    const classes = useStyles();
     const {coments, setComents} = useContext(PostsContext);
 
     const [coment, setComent] = React.useState(thisComent.coment);
@@ -40,9 +32,8 @@ export default function ComentEditor ({thisComent, handleEditComent}) {
 
     return (
       <Grid container justify="center">
-        <Grid item sm={9}>
+        <Grid item sm={12}>
                 <TextField 
-                    className={classes.textField}
                     label="Coment"
                     value={coment}
                     onChange={handleComent}

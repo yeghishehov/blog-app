@@ -7,25 +7,26 @@ import { Link } from 'react-router-dom';
 import {PostsContext} from '../Main/Main';
 import { makeStyles } from '@material-ui/core';
 import PostEditor from './PostEditor';
+import deletePost from './deletePost';
 import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Grid from '@material-ui/core/Grid';
+
 
 const useStyles = makeStyles({
     card: {
-        marginTop: 10,
-        paddingLeft: '10%',
-        paddingRight: '10%',
+        marginTop: 20,
         backgroundColor: '#edeeff',         
         wordWrap: 'break-word',
         textAlign: 'justify',
     },
     button: {
-        left: '70%',
-        marginBottom: 10
+        margin: 15
     },
 })
 
 export const Post = ({post}) => {
-    const {setSelectedPost, isUserLoged} = useContext(PostsContext);
+    const {setSelectedPost, isUserLoged, posts, setPost, coments, setComents} = useContext(PostsContext);
     const classes = useStyles();
     const [isEditPost, setIsEditPost] = React.useState(false);
     const logedUser = isUserLoged();
@@ -40,49 +41,76 @@ export const Post = ({post}) => {
         setIsEditPost(!isEditPost)
     }
 
-   return (  
-        <Card className={classes.card}>
-            {
-                isEditPost 
-                    ? (
-                        <PostEditor post={post} handleEditPost={handleEditPost}/>
-                    )
-                    : (
-                        <>
-                            <CardHeader 
-                                title={post.title}
-                                subheader={`author: ${post.authorName}`}
-                            />
-                            <CardContent>
-                                {post.content}
-                                <br /> <br />
-                                {post.date}
-                            </CardContent>
-                            {window.location.href.includes('post')
-                                ? ( 
-                                    accessEdit
-                                        ? (
-                                            <Button 
-                                                className={classes.button} 
-                                                color="primary"
-                                                onClick={handleEditPost}
-                                            >  
-                                                <EditIcon />
-                                            </Button>
-                                        ) : null
-                                ) : (
-                                    <Button 
-                                        className={classes.button} 
-                                        color="primary"
-                                        onClick={handleLearnMore}
-                                    >  
-                                        <Link to={`/post`} > Learn more </Link>
-                                    </Button>
+   return (         
+        <Card className={classes.card} >
+            <Grid container justify="center">
+                <Grid item sm={10} >
+                    <Grid container  >
+                        {
+                            isEditPost 
+                                ? (
+                                    <Grid item sm={12}>
+                                        <PostEditor post={post} handleEditPost={handleEditPost}/>
+                                    </Grid>
                                 )
-                            }
-                        </>
-                    )
-            }
+                                : (
+                                    <>
+                                        <Grid item sm={11}>
+                                            <CardHeader 
+                                                title={post.title}
+                                                subheader={`author: ${post.authorName}`}
+                                            />
+                                            <CardContent>
+                                                {post.content}
+                                                <br /> <br />
+                                                {post.date}
+                                            </CardContent>
+                                        </Grid >
+                                        {
+                                            accessEdit
+                                                ? (
+                                                    <Grid item sm={1}  >
+                                                        <Button 
+                                                            className={classes.button}
+                                                            color="primary"
+                                                            onClick={handleEditPost}
+                                                        >  
+                                                            <EditIcon />
+                                                        </Button>
+                                                        <Link to='/blog-app'>
+                                                            <Button
+                                                                className={classes.button}
+                                                                color="primary"
+                                                                onClick={() => deletePost(post, posts, setPost, coments, setComents)}
+                                                            >
+                                                                <DeleteIcon />
+                                                            </Button>
+                                                        </Link>
+                                                    </Grid>
+                                                ) : null
+                                        }
+                                        {window.location.href.includes('post')
+                                            ? ( 
+                                                null
+                                            ) : (
+                                                <Grid container justify='flex-end'>
+                                                    <Button 
+                                                        className={classes.button} 
+                                                        color="primary"
+                                                        onClick={handleLearnMore}
+                                                    >  
+                                                        <Link to={`/post`} > Learn more </Link>
+                                                    </Button>
+                                                </Grid>
+                                            )
+                                        }
+                                    </>
+
+                                )
+                        }
+                    </Grid>
+                </Grid>
+            </Grid>
         </Card>
     )
 }
