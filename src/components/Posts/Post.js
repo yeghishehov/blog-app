@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import { PostsContext } from "../Main/Main";
 
 import PostEditor from "./PostEditor";
-import deletePost from "./deletePost";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Grid from "@material-ui/core/Grid";
@@ -39,6 +38,20 @@ export const Post = ({ post }) => {
   const handleEditPost = () => {
     setIsEditPost(!isEditPost);
   };
+
+  const deletePost = () => {
+    const updatePosts = posts.filter(pt => pt.id !== post.id);
+    
+    const updateComments = comments.filter(
+      comment => comment.postId !== post.id
+    );
+
+    localStorage.setItem("commentsStorage", JSON.stringify([...updateComments]));
+    localStorage.setItem("postsStorage", JSON.stringify([...updatePosts]));
+
+    setComments([...updateComments]);
+    setPost([...updatePosts]);
+  }
 
   return (
     <Card className={classes.card} >
