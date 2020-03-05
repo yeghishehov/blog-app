@@ -13,28 +13,28 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function CreateComents ({ post }) {
+export default function CreateComments ({ post }) {
   const classes = useStyles();
-  const { coments, setComents, isUserLoged } = useContext(PostsContext);
+  const { comments, setComments, isUserLoged } = useContext(PostsContext);
   const loggedUser = isUserLoged();
 
-  const [coment, setComent] = React.useState("");
+  const [comment, setComment] = React.useState("");
 
-  const handleComent = e => {
-    setComent(e.target.value);
+  const handleComment = e => {
+    setComment(e.target.value);
   };
 
-  const handleAddComent = () => {
-    const id = getUniqueId(coments) + 1;
+  const handleAddComment = () => {
+    const id = getUniqueId(comments) + 1;
     const postId = post.id;
     const authorId = loggedUser.id;
     const authorName = loggedUser.name;
     const date = new Date().toLocaleString();
 
-    const updateComents = [...coments, { id, coment, postId, authorId, authorName, date }];
-    localStorage.setItem("comentsStorage", JSON.stringify([...updateComents]));
-    setComents([...updateComents]);
-    setComent("");
+    const updateComments = [...comments, { id, comment, postId, authorId, authorName, date }];
+    localStorage.setItem("commentsStorage", JSON.stringify([...updateComments]));
+    setComments([...updateComments]);
+    setComment("");
   };
 
   return (
@@ -42,16 +42,16 @@ export default function CreateComents ({ post }) {
       <Grid item sm={9}>
         <TextField
           className={classes.textField}
-          label="Coment"
-          value={coment}
-          onChange={handleComent}
+          label="Comment"
+          value={comment}
+          onChange={handleComment}
           fullWidth
           multiline
           rows={2}
           rowsMax={4}
         />
         <Grid container direction="row-reverse">
-          <IconButton color="primary" onClick={handleAddComent}>
+          <IconButton color="primary" onClick={handleAddComment}>
             <DoneIcon />
           </IconButton>
         </Grid>

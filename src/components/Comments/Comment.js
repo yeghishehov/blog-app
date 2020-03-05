@@ -3,8 +3,8 @@ import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import { makeStyles, Button } from "@material-ui/core";
-import ComentEditor from "./ComentEditor";
-import deleteComent from "./deleteComent";
+import CommentEditor from "./CommentEditor";
+import deleteComment from "./deleteComment";
 import { PostsContext } from "../Main/Main";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -27,16 +27,16 @@ const useStyles = makeStyles({
   }
 });
 
-export const Coment = ({ coment }) => {
+export const Comment = ({ comment }) => {
   const classes = useStyles();
-  const [isEditComent, setIsEditComent] = React.useState(false);
-  const { isUserLoged, coments, setComents } = useContext(PostsContext);
+  const [isEditComment, setIsEditComment] = React.useState(false);
+  const { isUserLoged, comments, setComments } = useContext(PostsContext);
   const logedUser = isUserLoged();
 
-  const accessEdit = logedUser ? logedUser.id === coment.authorId : false;
+  const accessEdit = logedUser ? logedUser.id === comment.authorId : false;
 
-  const handleEditComent = () => {
-    setIsEditComent(!isEditComent);
+  const handleEditComment = () => {
+    setIsEditComment(!isEditComment);
   };
 
   return (
@@ -45,23 +45,23 @@ export const Coment = ({ coment }) => {
         <Grid item sm={10} >
           <Grid container >
             {
-              isEditComent
+              isEditComment
                 ? (
                   <Grid item sm={12}>
-                    <ComentEditor
-                      handleEditComent={handleEditComent}
-                      thisComent={coment}
+                    <CommentEditor
+                      handleEditComment={handleEditComment}
+                      thisComment={comment}
                     />
                   </Grid>
                 ) : (
                   <>
                     <Grid item sm={11}>
                       <CardHeader
-                        title={coment.authorName}
-                        subheader={coment.date}
+                        title={comment.authorName}
+                        subheader={comment.date}
                       />
                       <CardContent className={classes.cardContent} >
-                        {coment.coment}
+                        {comment.comment}
                       </CardContent>
                     </Grid>
                     {
@@ -71,14 +71,14 @@ export const Coment = ({ coment }) => {
                             <Button
                               className={classes.button}
                               color="primary"
-                              onClick={handleEditComent}
+                              onClick={handleEditComment}
                             >
                               <EditIcon />
                             </Button>
                             <Button
                               className={classes.button}
                               color="primary"
-                              onClick={() => deleteComent(coment, coments, setComents)}
+                              onClick={() => deleteComment(comment, comments, setComments)}
                             >
                               <DeleteIcon />
                             </Button>

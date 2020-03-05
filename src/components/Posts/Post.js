@@ -25,7 +25,7 @@ const useStyles = makeStyles({
 });
 
 export const Post = ({ post }) => {
-  const { setSelectedPost, isUserLoged, posts, setPost, coments, setComents } = useContext(PostsContext);
+  const { setSelectedPost, isUserLoged, posts, setPost, comments, setComments } = useContext(PostsContext);
   const classes = useStyles();
   const [isEditPost, setIsEditPost] = React.useState(false);
   const logedUser = isUserLoged();
@@ -80,7 +80,7 @@ export const Post = ({ post }) => {
                               <Button
                                 className={classes.button}
                                 color="primary"
-                                onClick={() => deletePost(post, posts, setPost, coments, setComents)}
+                                onClick={() => deletePost(post, posts, setPost, comments, setComments)}
                               >
                                 <DeleteIcon />
                               </Button>

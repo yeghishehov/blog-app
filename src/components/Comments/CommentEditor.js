@@ -5,45 +5,45 @@ import DoneIcon from "@material-ui/icons/Done";
 import { PostsContext } from "../Main/Main";
 import { IconButton } from "@material-ui/core";
 
-export default function ComentEditor ({ thisComent, handleEditComent }) {
-  const { coments, setComents } = useContext(PostsContext);
+export default function CommentEditor ({ thisComment, handleEditComment }) {
+  const { comments, setComments } = useContext(PostsContext);
 
-  const [coment, setComent] = React.useState(thisComent.coment);
+  const [comment, setComment] = React.useState(thisComment.comment);
 
-  const handleComent = e => {
-    setComent(e.target.value);
+  const handleComment = e => {
+    setComment(e.target.value);
   };
 
-  const handleAddComent = () => {
+  const handleAddComment = () => {
     const date = new Date().toLocaleString();
 
-    const updateComents = coments.map(c => {
-      if (c.id === thisComent.id) {
-        c.coment = coment;
+    const updateComments = comments.map(c => {
+      if (c.id === thisComment.id) {
+        c.comment = comment;
         c.date = date;
       }
       return c;
     });
 
-    localStorage.setItem("comentsStorage", JSON.stringify([...updateComents]));
-    setComents([...updateComents]);
-    handleEditComent();
+    localStorage.setItem("commentsStorage", JSON.stringify([...updateComments]));
+    setComments([...updateComments]);
+    handleEditComment();
   };
 
   return (
     <Grid container justify="center">
       <Grid item sm={12}>
         <TextField
-          label="Coment"
-          value={coment}
-          onChange={handleComent}
+          label="Comment"
+          value={comment}
+          onChange={handleComment}
           fullWidth
           multiline
           rows={2}
           rowsMax={4}
         />
         <Grid container direction="row-reverse">
-          <IconButton color="primary" onClick={handleAddComent}>
+          <IconButton color="primary" onClick={handleAddComment}>
             <DoneIcon />
           </IconButton>
         </Grid>

@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import { PostsContext } from "../Main/Main";
 import { Post } from "./Post";
 import { makeStyles, Button } from "@material-ui/core";
-import CreateComents from "../Coments/CreateComent";
-import ComentsPost from "../Coments/ComentsPost";
+import CreateComments from "../Comments/CreateComment";
+import CommentsPost from "../Comments/CommentsPost";
 
 const useStyles = makeStyles({
   centered: {
@@ -39,8 +39,8 @@ export function PostPage () {
   return (
     <div className={classes.centered}>
       <Post post={selectedPost} loggedUser={loggedUser} />
-      <CreateComents post={selectedPost} />
-      <ComentsPost post={selectedPost} />
+      <CreateComments post={selectedPost} />
+      <CommentsPost post={selectedPost} />
     </div>
   );
 }

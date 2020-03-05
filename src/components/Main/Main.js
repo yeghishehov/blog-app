@@ -12,14 +12,14 @@ export default function Main () {
   const [users, setUser] = useState([]);
   const [posts, setPost] = useState([]);
   const [selectedPost, setSelectedPost] = useState({});
-  const [coments, setComents] = useState([]);
+  const [comments, setComments] = useState([]);
 
   const isUserLoged = () => users.find(user => user.isLogged === true);
 
   useEffect(() => {
     const usersStorage = JSON.parse(localStorage.getItem("usersStorage"));
     const postsStorage = JSON.parse(localStorage.getItem("postsStorage"));
-    const comentsStorage = JSON.parse(localStorage.getItem("comentsStorage"));
+    const commentsStorage = JSON.parse(localStorage.getItem("commentsStorage"));
 
     usersStorage
       ? setUser([...usersStorage])
@@ -43,11 +43,11 @@ export default function Main () {
         date: "22.02.2020, 01:57:16"
       }]);
 
-    comentsStorage
-      ? setComents([...comentsStorage])
-      : setComents([{
+    commentsStorage
+      ? setComments([...commentsStorage])
+      : setComments([{
         id: 1,
-        coment: "my first coment",
+        comment: "my first comment",
         postId: 1,
         authorId: 1,
         authorName: "admin",
@@ -67,8 +67,8 @@ export default function Main () {
         value={{
           posts,
           setPost,
-          coments,
-          setComents,
+          comments,
+          setComments,
           isUserLoged,
           selectedPost,
           setSelectedPost
