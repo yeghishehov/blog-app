@@ -4,7 +4,6 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import { makeStyles, Button } from "@material-ui/core";
 import CommentEditor from "./CommentEditor";
-import deleteComment from "./deleteComment";
 import { PostsContext } from "../Main/Main";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -37,6 +36,15 @@ export const Comment = ({ comment }) => {
 
   const handleEditComment = () => {
     setIsEditComment(!isEditComment);
+  };
+
+  const deleteComment = () => {
+    const updateComments = comments.filter(
+      comm => comm.id !== comment.id
+    );
+
+    localStorage.setItem("commentsStorage", JSON.stringify([...updateComments]));
+    setComments([...updateComments]);
   };
 
   return (
@@ -78,7 +86,7 @@ export const Comment = ({ comment }) => {
                             <Button
                               className={classes.button}
                               color="primary"
-                              onClick={() => deleteComment(comment, comments, setComments)}
+                              onClick={deleteComment}
                             >
                               <DeleteIcon />
                             </Button>
