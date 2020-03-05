@@ -15,11 +15,19 @@ export default function Login (props) {
 
   const handleLogin = () => {
     if (userName !== "" && password !== "") {
-      const userIndex = users.findIndex(user => userName === user.name && password === user.password);
-      if (userIndex > -1) {
-        users[userIndex].isLogged = true;
-        localStorage.setItem("usersStorage", JSON.stringify([...users]));
-        setUser([...users]);
+      const registeredUser = users.find(user => userName === user.name && password === user.password);
+
+      if (registeredUser) {
+        const usersWithoutCurrent = users.filter(
+          user =>
+            user.name !== registeredUser.name &&
+            user.password !== registeredUser.password
+        );
+
+        const updateUsers = [...usersWithoutCurrent, { ...registeredUser, isLogged: true }];
+
+        localStorage.setItem("usersStorage", JSON.stringify([...updateUsers]));
+        setUser([...updateUsers]);
       } else {
         const id = getUniqueId(users) + 1;
         const updateUsers = [...users, { id, name: userName, password, isLogged: true }];
