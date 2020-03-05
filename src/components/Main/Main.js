@@ -14,10 +14,7 @@ export default function Main () {
   const [selectedPost, setSelectedPost] = useState({});
   const [coments, setComents] = useState([]);
 
-  const isUserLoged = () => {
-    const user = users.find(user => user.isLogged === true);
-    return user;
-  };
+  const isUserLoged = () => users.find(user => user.isLogged === true);
 
   useEffect(() => {
     const usersStorage = JSON.parse(localStorage.getItem("usersStorage"));
